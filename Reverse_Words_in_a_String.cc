@@ -8,31 +8,29 @@ using namespace std;
 
 class Solution {
 public:
+	bool checkCondition(int wordPos,int length){
+		if(wordPos < length)
+			return true;
+		else
+			return false;
+	}
     string reverseWords(string &s) {
-        reverse(s.begin(),s.end());
         int startPos = 0;
-        int length = 0;
-        int realPos = 0;
-        for(int i = 0; i < s.size(); i++){
-            if(s[i] == ' '){
-                if(length){
-                    reverse(s.begin()+startPos,s.begin()+startPos+length);
-                    length = 0;
-                    s[realPos++] = s[i];
-                }
-            }
-            else{
-                if(length == 0)
-                    startPos = realPos;
-                s[realPos++] = s[i];
-                length++;
-            }
+        int wordPos = 0;
+        int ansPos = 0;
+		int length = s.size();
+		while(checkCondition(wordPos,length)){
+			while(checkCondition(wordPos,length) && s[wordPos] == ' ')
+				wordPos++;
+			if(checkCondition(wordPos,length) && ansPos > 0)
+				s[ansPos++] = ' ';
+			startPos = ansPos;
+			while(checkCondition(wordPos,length) && s[wordPos] != ' ')
+				s[ansPos++] = s[wordPos++];
+			reverse(s.begin()+startPos,s.begin()+ansPos);
         }
-        if(length){
-            reverse(s.begin()+startPos,s.begin()+startPos+length);
-        }
-        s.erase(realPos);
-        s.erase(s.find_last_not_of(" ") + 1);
+        s.resize(ansPos);
+		reverse(s.begin(), s.end());
 		return s;
     }
 };
