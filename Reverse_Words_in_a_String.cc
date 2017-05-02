@@ -37,11 +37,28 @@ public:
     }
 };
 
+TEST(reverseWords, spacestring) {
+  string s ="   ";
+  string ans = "";
+  EXPECT_EQ(Solution().reverseWords(s),ans);
+}
+
+TEST(reverseWords, Firstspacestring) {
+  string s =" a";
+  string ans = "a";
+  EXPECT_EQ(Solution().reverseWords(s),ans);
+}
+
+TEST(reverseWords, Lastspacestring) {
+  string s ="a ";
+  string ans = "a";
+  EXPECT_EQ(Solution().reverseWords(s),ans);
+}
+
 TEST(reverseWords, longstring) {
-  string s ="the sky is blue";
+  string s ="the sky    is   blue";
   string ans = "blue is sky the";
   EXPECT_EQ(Solution().reverseWords(s),ans);
-
 }
 
 int main(int argc, char** argv) {
